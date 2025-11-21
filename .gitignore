@@ -1,0 +1,17 @@
+# Ignore all build output
+[Bb]in/
+[Oo]bj/
+
+# Ignore user-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Ignore NuGet package folders
+**/packages/*
+!**/packages/build/ # Except for specific folders that might be needed
+
+# Ignore Visual Studio and VS Code files
+.vs/
+*.code-workspace

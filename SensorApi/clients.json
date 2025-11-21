@@ -1,0 +1,19 @@
+{
+    "clients": [
+        {
+            "name": "ClientA",
+            "prefix": "ClientA",
+            "apiKey": "key-client-a-12345"
+        },
+        {
+            "name": "ClientB",
+            "prefix": "ClientB",
+            "apiKey": "key-client-b-67890"
+        },
+        {
+            "name": "ClientC",
+            "prefix": "ClientC",
+            "apiKey": "key-client-c-11111"
+        }
+    ]
+}
