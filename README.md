@@ -118,7 +118,6 @@ Tests are organized by directory, with:
 
 ### Architecture
 
--   Domain Layer handles all business logic
 -   Controllers focus solely on input validation
 -   Domain classes (`ReadDomain`, `WriteDomain`) contain the core logic
 -   If using a database instead of in-memory storage, data access logic would reside in a DAO (Data Access Object) layer
@@ -143,9 +142,46 @@ Tests are organized by directory, with:
 
 -   **ConcurrentDictionary<string, List<DataPoint>>** per sensor with **per-sensor locks**
 -   Rationale:
-    -   Simple and thread-safe
-    -   Efficient for append-heavy workloads
-    -   Allows fast per-sensor read/write without locking unrelated sensors
+    -   Simple, predictable behavior
+    -   Optimized for append heavy workloads
+    -   No global locks, so sensors do not block each other
+    -   Filtering is done on a snapshot outside the lock to reduce contention
+
+#### Why Not Other Approaches For InMemorySensorStore
+
+##### ConcurrentBag`<DataPoint>`
+
+-   `ConcurrentBag` is unordered, so timestamps would be jumbled and require sorting every time you read
+-   Removing or updating individual items is difficult or impossible
+-   Performance degrades with large collections, because bags spread entries across internal structures
+-   No ability to maintain a consistent snapshot without copying everything
+
+##### ImmutableList`<DataPoint>`
+
+-   Great for read heavy systems, but each append creates a new list
+-   Significant allocation and copying for write heavy workloads
+
+##### Using List without locks
+
+-   Not thread safe
+-   Writes and enumerations can corrupt the structure
+
+##### ReaderWriterLockSlim
+
+-   Adds complexity
+-   Can incur overhead or cause write starvation
+-   Per sensor locking with simple lock objects is faster and easier
+
+##### Global lock around the whole store
+
+-   All sensors block each other
+-   Poor scalability under load
+
+##### Database
+
+-   Adds external dependencies
+-   Slower than in memory
+-   Overkill for the assignment
 
 ### Endpoints
 
@@ -156,7 +192,6 @@ Tests are organized by directory, with:
     -   Returns total points stored for monitoring
 
 -   **Read endpoint**
-
     -   Accepts sensor names and time range
     -   Returns a snapshot of matching points
     -   Filtering done outside the lock to minimize contention
