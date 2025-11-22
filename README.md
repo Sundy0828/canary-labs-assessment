@@ -1,5 +1,7 @@
 # Canary Labs In-Memory Sensor API Challenge
 
+[![codecov](https://codecov.io/gh/Sundy0828/canary-labs-assessment/graph/badge.svg?token=PLRUT7SSXZ)](https://codecov.io/gh/Sundy0828/canary-labs-assessment)
+
 This project implements a high-throughput, in-memory sensor data API. It provides:
 
 -   A **write endpoint** for storing sensor readings
