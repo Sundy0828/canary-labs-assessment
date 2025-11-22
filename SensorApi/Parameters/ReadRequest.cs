@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace SensorApi.Parameters;
 
 public class ReadRequest

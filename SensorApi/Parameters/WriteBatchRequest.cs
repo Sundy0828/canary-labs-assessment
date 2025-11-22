@@ -1,5 +1,4 @@
 using SensorApi.DTO;
-using System.Collections.Generic;
 
 namespace SensorApi.Parameters;
 

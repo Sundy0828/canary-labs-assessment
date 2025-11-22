@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using SensorApi.Models;
 
 namespace SensorApi.Stores.Interfaces;

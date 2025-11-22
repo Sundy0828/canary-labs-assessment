@@ -1,6 +1,4 @@
-using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using SensorApi.Attributes;
 using SensorApi.Domains.Interfaces;
 using SensorApi.Models;

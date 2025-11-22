@@ -1,5 +1,3 @@
-using SensorApi.Models;
-
 namespace SensorApi.Tests.Stores;
 
 public class TotalPointsStoredTests : InMemorySensorStoreTestBase
